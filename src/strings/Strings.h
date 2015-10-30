@@ -48,7 +48,7 @@ class Strings {
   static std::vector<std::string> split(const std::string& _s, char _delim);
 
   template <typename T>
-  static std::string toString(const std::vector<T>& _a);
+  static std::string vecString(const std::vector<T>& _a);
 
  private:
   Strings();

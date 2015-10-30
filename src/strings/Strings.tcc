@@ -37,7 +37,7 @@
 #include <vector>
 
 template <typename T>
-std::string Strings::toString(const std::vector<T>& _v) {
+std::string Strings::vecString(const std::vector<T>& _v) {
   std::stringstream ss;
   ss << "[";
   for (u64 i = 0; i < _v.size(); i++) {

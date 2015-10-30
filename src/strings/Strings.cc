@@ -78,7 +78,8 @@ std::vector<std::string> Strings::split(const std::string& _s, char _delim) {
   std::vector<std::string> tokens;
   std::stringstream ss(_s);
   std::string item;
-  while (std::getline(ss, item, _delim))
+  while (std::getline(ss, item, _delim)) {
     tokens.push_back(item);
+  }
   return tokens;
 }

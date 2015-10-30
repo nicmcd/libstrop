@@ -27,7 +27,7 @@
 *.out
 *.app
 
-# build dirs
+# Binary, Build, and Include Directories
 bin/
 bld/
 inc/

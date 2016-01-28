@@ -1,5 +1,5 @@
 #--------------------- Basic Settings -----------------------------------------#
-PROGRAM_NAME  := strings
+PROGRAM_NAME  := strop
 BINARY_BASE   := bin
 BUILD_BASE    := bld
 INCLUDE_BASE  := inc

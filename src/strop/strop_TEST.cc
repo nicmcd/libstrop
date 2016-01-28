@@ -28,58 +28,47 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#include "strings/Strings.h"
+#include "strop/strop.h"
 
-#include <algorithm>
-#include <functional>
-#include <cctype>
-#include <locale>
-#include <sstream>
+#include <gtest/gtest.h>
+#include <prim/prim.h>
 
-// modified from:
-// http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring  NOLINT
+#include <string>
+#include <vector>
 
-// trim from start
-std::string Strings::leftTrim(std::string _s) {
-  _s.erase(_s.begin(),
-           std::find_if(_s.begin(), _s.end(),
-                        std::not1(std::ptr_fun<int, int>(std::isspace))));
-  return _s;
+TEST(StrOp, trim) {
+  ASSERT_EQ("str ", strop::leftTrim(" str "));
+  ASSERT_EQ(" str", strop::rightTrim(" str "));
+  ASSERT_EQ("str", strop::trim(" str "));
+  ASSERT_EQ("str    ", strop::leftTrim("    str    "));
+  ASSERT_EQ("    str", strop::rightTrim("    str    "));
+  ASSERT_EQ("str", strop::trim("    str    "));
 }
 
-// trim from end
-std::string Strings::rightTrim(std::string _s) {
-  _s.erase(std::find_if(
-      _s.rbegin(),
-      _s.rend(),
-      std::not1(std::ptr_fun<int, int>(std::isspace))).base(), _s.end());
-  return _s;
+TEST(StrOp, lowerUpper) {
+  ASSERT_EQ("lower", strop::toLower("LoWeR"));
+  ASSERT_EQ("UPPER", strop::toUpper("uPpEr"));
 }
 
-// trim from both ends
-std::string Strings::trim(std::string _s) {
-  return leftTrim(rightTrim(_s));
-}
+TEST(StrOp, split) {
+  std::vector<std::string> exp = {"1", "2", "3"};
+  std::vector<std::string> act;
 
-// converts to uppercase
-std::string Strings::toLower(std::string _s) {
-  std::transform(_s.begin(), _s.end(), _s.begin(), ::tolower);
-  return _s;
-}
-
-// converts to lowercase
-std::string Strings::toUpper(std::string _s) {
-  std::transform(_s.begin(), _s.end(), _s.begin(), ::toupper);
-  return _s;
-}
-
-// split a string into tokens via a delimiter
-std::vector<std::string> Strings::split(const std::string& _s, char _delim) {
-  std::vector<std::string> tokens;
-  std::stringstream ss(_s);
-  std::string item;
-  while (std::getline(ss, item, _delim)) {
-    tokens.push_back(item);
+  act = strop::split("1 2 3", ' ');
+  ASSERT_EQ(exp.size(), act.size());
+  for (u8 i = 0; i < exp.size(); i++) {
+    ASSERT_EQ(act[i], exp[i]);
   }
-  return tokens;
+
+  act = strop::split("1=2=3", '=');
+  ASSERT_EQ(exp.size(), act.size());
+  for (u8 i = 0; i < exp.size(); i++) {
+    ASSERT_EQ(act[i], exp[i]);
+  }
+}
+
+TEST(StrOp, vecString) {
+  ASSERT_EQ("[1,2,3]", strop::vecString<u32>({1, 2, 3}));
+  ASSERT_EQ("[1,2,3]", strop::vecString<char>({'1', '2', '3'}));
+  ASSERT_EQ("[-1,2,-3]", strop::vecString<s64>({-1, 2, -3}));
 }

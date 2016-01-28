@@ -28,20 +28,30 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef STRINGS_STRINGS_H_
-#error "don't include this file directly. use the .h file instead"
-#endif  // STRINGS_STRINGS_H_
+#ifndef STROP_STROP_H_
+#define STROP_STROP_H_
 
-#include <sstream>
+#include <prim/prim.h>
+
 #include <string>
 #include <vector>
 
+namespace strop {
+
+std::string leftTrim(std::string _s);
+std::string rightTrim(std::string _s);
+std::string trim(std::string _s);
+
+std::string toLower(std::string _s);
+std::string toUpper(std::string _s);
+
+std::vector<std::string> split(const std::string& _s, char _delim);
+
 template <typename T>
-std::string Strings::vecString(const std::vector<T>& _v) {
-  std::stringstream ss;
-  ss << "[";
-  for (u64 i = 0; i < _v.size(); i++) {
-    ss << _v[i] << ((i == _v.size() - 1) ? "]" : ",");
-  }
-  return ss.str();
-}
+std::string vecString(const std::vector<T>& _a);
+
+}  // namespace strop
+
+#include "strop/strop.tcc"
+
+#endif  // STROP_STROP_H_

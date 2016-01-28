@@ -28,47 +28,24 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#include "strings/Strings.h"
+#ifndef STROP_STROP_H_
+#error "don't include this file directly. use the .h file instead"
+#endif  // STROP_STROP_H_
 
-#include <gtest/gtest.h>
-#include <prim/prim.h>
-
+#include <sstream>
 #include <string>
 #include <vector>
 
-TEST(Strings, trim) {
-  ASSERT_EQ("str ", Strings::leftTrim(" str "));
-  ASSERT_EQ(" str", Strings::rightTrim(" str "));
-  ASSERT_EQ("str", Strings::trim(" str "));
-  ASSERT_EQ("str    ", Strings::leftTrim("    str    "));
-  ASSERT_EQ("    str", Strings::rightTrim("    str    "));
-  ASSERT_EQ("str", Strings::trim("    str    "));
-}
+namespace strop {
 
-TEST(Strings, lowerUpper) {
-  ASSERT_EQ("lower", Strings::toLower("LoWeR"));
-  ASSERT_EQ("UPPER", Strings::toUpper("uPpEr"));
-}
-
-TEST(Strings, split) {
-  std::vector<std::string> exp = {"1", "2", "3"};
-  std::vector<std::string> act;
-
-  act = Strings::split("1 2 3", ' ');
-  ASSERT_EQ(exp.size(), act.size());
-  for (u8 i = 0; i < exp.size(); i++) {
-    ASSERT_EQ(act[i], exp[i]);
+template <typename T>
+std::string vecString(const std::vector<T>& _v) {
+  std::stringstream ss;
+  ss << "[";
+  for (u64 i = 0; i < _v.size(); i++) {
+    ss << _v[i] << ((i == _v.size() - 1) ? "]" : ",");
   }
-
-  act = Strings::split("1=2=3", '=');
-  ASSERT_EQ(exp.size(), act.size());
-  for (u8 i = 0; i < exp.size(); i++) {
-    ASSERT_EQ(act[i], exp[i]);
-  }
+  return ss.str();
 }
 
-TEST(Strings, vecString) {
-  ASSERT_EQ("[1,2,3]", Strings::vecString<u32>({1, 2, 3}));
-  ASSERT_EQ("[1,2,3]", Strings::vecString<char>({'1', '2', '3'}));
-  ASSERT_EQ("[-1,2,-3]", Strings::vecString<s64>({-1, 2, -3}));
-}
+}  // namespace strop

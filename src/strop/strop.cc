@@ -28,32 +28,62 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef STRINGS_STRINGS_H_
-#define STRINGS_STRINGS_H_
+#include "strop/strop.h"
 
-#include <prim/prim.h>
+#include <algorithm>
+#include <functional>
+#include <cctype>
+#include <locale>
+#include <sstream>
 
-#include <string>
-#include <vector>
+// modified from:
+// http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring  NOLINT
 
-class Strings {
- public:
-  static std::string leftTrim(std::string _s);
-  static std::string rightTrim(std::string _s);
-  static std::string trim(std::string _s);
+namespace strop {
 
-  static std::string toLower(std::string _s);
-  static std::string toUpper(std::string _s);
+// trim from start
+std::string leftTrim(std::string _s) {
+  _s.erase(_s.begin(),
+           std::find_if(_s.begin(), _s.end(),
+                        std::not1(std::ptr_fun<int, int>(std::isspace))));
+  return _s;
+}
 
-  static std::vector<std::string> split(const std::string& _s, char _delim);
+// trim from end
+std::string rightTrim(std::string _s) {
+  _s.erase(std::find_if(
+      _s.rbegin(),
+      _s.rend(),
+      std::not1(std::ptr_fun<int, int>(std::isspace))).base(), _s.end());
+  return _s;
+}
 
-  template <typename T>
-  static std::string vecString(const std::vector<T>& _a);
+// trim from both ends
+std::string trim(std::string _s) {
+  return leftTrim(rightTrim(_s));
+}
 
- private:
-  Strings();
-};
+// converts to uppercase
+std::string toLower(std::string _s) {
+  std::transform(_s.begin(), _s.end(), _s.begin(), ::tolower);
+  return _s;
+}
 
-#include "strings/Strings.tcc"
+// converts to lowercase
+std::string toUpper(std::string _s) {
+  std::transform(_s.begin(), _s.end(), _s.begin(), ::toupper);
+  return _s;
+}
 
-#endif  // STRINGS_STRINGS_H_
+// split a string into tokens via a delimiter
+std::vector<std::string> split(const std::string& _s, char _delim) {
+  std::vector<std::string> tokens;
+  std::stringstream ss(_s);
+  std::string item;
+  while (std::getline(ss, item, _delim)) {
+    tokens.push_back(item);
+  }
+  return tokens;
+}
+
+}  // namespace strop

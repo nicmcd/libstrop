@@ -39,11 +39,11 @@
 namespace strop {
 
 template <typename T>
-std::string vecString(const std::vector<T>& _v) {
+std::string vecString(const std::vector<T>& _v, char _delim) {
   std::stringstream ss;
   ss << "[";
   for (u64 i = 0; i < _v.size(); i++) {
-    ss << _v[i] << ((i == _v.size() - 1) ? "]" : ",");
+    ss << _v[i] << ((i == _v.size() - 1) ? ']' : _delim);
   }
   return ss.str();
 }

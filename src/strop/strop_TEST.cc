@@ -67,8 +67,26 @@ TEST(StrOp, split) {
   }
 }
 
-TEST(StrOp, vecString) {
+TEST(StrOp, vecString_defDelim) {
   ASSERT_EQ("[1,2,3]", strop::vecString<u32>({1, 2, 3}));
   ASSERT_EQ("[1,2,3]", strop::vecString<char>({'1', '2', '3'}));
   ASSERT_EQ("[-1,2,-3]", strop::vecString<s64>({-1, 2, -3}));
+}
+
+TEST(StrOp, vecString_specDelim1) {
+  ASSERT_EQ("[1,2,3]", strop::vecString<u32>({1, 2, 3}, ','));
+  ASSERT_EQ("[1,2,3]", strop::vecString<char>({'1', '2', '3'}, ','));
+  ASSERT_EQ("[-1,2,-3]", strop::vecString<s64>({-1, 2, -3}, ','));
+}
+
+TEST(StrOp, vecString_specDelim2) {
+  ASSERT_EQ("[1-2-3]", strop::vecString<u32>({1, 2, 3}, '-'));
+  ASSERT_EQ("[1-2-3]", strop::vecString<char>({'1', '2', '3'}, '-'));
+  ASSERT_EQ("[-1-2--3]", strop::vecString<s64>({-1, 2, -3}, '-'));
+}
+
+TEST(StrOp, vecString_specDelim3) {
+  ASSERT_EQ("[1.2.3]", strop::vecString<u32>({1, 2, 3}, '.'));
+  ASSERT_EQ("[1.2.3]", strop::vecString<char>({'1', '2', '3'}, '.'));
+  ASSERT_EQ("[-1.2.-3]", strop::vecString<s64>({-1, 2, -3}, '.'));
 }

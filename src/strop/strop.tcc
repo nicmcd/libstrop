@@ -41,8 +41,10 @@ namespace strop {
 template <typename T>
 std::string vecString(const std::vector<T>& _v, char _delim, s32 precision) {
   std::stringstream ss;
-  ss.setf(std::ios::fixed);
-  ss.precision(precision);
+  if (precision >= 0) {
+    ss.setf(std::ios::fixed);
+    ss.precision(precision);
+  }
   ss << "[";
   for (u64 i = 0; i < _v.size(); i++) {
     ss << _v[i] << ((i == _v.size() - 1) ? ']' : _delim);

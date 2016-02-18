@@ -49,7 +49,7 @@ std::vector<std::string> split(const std::string& _s, char _delim);
 
 template <typename T>
 std::string vecString(const std::vector<T>& _a, char delim = ',',
-                      s32 precision = 2);
+                      s32 precision = -1);
 
 }  // namespace strop
 

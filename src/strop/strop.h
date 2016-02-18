@@ -48,7 +48,8 @@ std::string toUpper(std::string _s);
 std::vector<std::string> split(const std::string& _s, char _delim);
 
 template <typename T>
-std::string vecString(const std::vector<T>& _a, char delim = ',');
+std::string vecString(const std::vector<T>& _a, char delim = ',',
+                      s32 precision = 2);
 
 }  // namespace strop
 

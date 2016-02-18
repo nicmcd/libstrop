@@ -90,3 +90,17 @@ TEST(StrOp, vecString_specDelim3) {
   ASSERT_EQ("[1.2.3]", strop::vecString<char>({'1', '2', '3'}, '.'));
   ASSERT_EQ("[-1.2.-3]", strop::vecString<s64>({-1, 2, -3}, '.'));
 }
+
+TEST(StrOp, vecString_floatDefPrec) {
+  std::vector<f64> vals({1.0/3, 2.0/3, 3.0/3});
+  ASSERT_EQ("[0.33,0.67,1.00]", strop::vecString<f64>(vals, ',', 2));
+  ASSERT_EQ("[0.33-0.67-1.00]", strop::vecString<f64>(vals, '-', 2));
+}
+
+TEST(StrOp, vecString_floatSpecificPrec) {
+  std::vector<f64> vals({1.0/3, 2.0/3, 3.0/3});
+  ASSERT_EQ("[0,1,1]", strop::vecString<f64>(vals, ',', 0));
+  ASSERT_EQ("[0.3,0.7,1.0]", strop::vecString<f64>(vals, ',', 1));
+  ASSERT_EQ("[0.33,0.67,1.00]", strop::vecString<f64>(vals, ',', 2));
+  ASSERT_EQ("[0.333,0.667,1.000]", strop::vecString<f64>(vals, ',', 3));
+}

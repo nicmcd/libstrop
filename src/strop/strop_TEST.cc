@@ -33,6 +33,8 @@
 #include <gtest/gtest.h>
 #include <prim/prim.h>
 
+#include <cstring>
+
 #include <string>
 #include <vector>
 
@@ -103,4 +105,16 @@ TEST(StrOp, vecString_floatSpecificPrec) {
   ASSERT_EQ("[0.3,0.7,1.0]", strop::vecString<f64>(vals, ',', 1));
   ASSERT_EQ("[0.33,0.67,1.00]", strop::vecString<f64>(vals, ',', 2));
   ASSERT_EQ("[0.333,0.667,1.000]", strop::vecString<f64>(vals, ',', 3));
+}
+
+TEST(StrOp, toCharArrays) {
+  std::vector<std::string> v1({"-n", "10", "--page_size", "4096"});
+  std::vector<char*> v2 = strop::toCharArrays(v1);
+  ASSERT_EQ(v1.size(), v2.size());
+  for (u32 i = 0; i < v1.size(); i++) {
+    ASSERT_EQ(0, std::strcmp(v1.at(0).c_str(), v2.at(0)));
+  }
+  for (char* s : v2) {
+    delete[] s;
+  }
 }

@@ -30,6 +30,8 @@
  */
 #include "strop/strop.h"
 
+#include <cstring>
+
 #include <algorithm>
 #include <functional>
 #include <cctype>
@@ -84,6 +86,18 @@ std::vector<std::string> split(const std::string& _s, char _delim) {
     tokens.push_back(item);
   }
   return tokens;
+}
+
+// turn a vector of strings into a vector of newly allocated char*
+//  NOTE: the user to responsible for deallocating the memory of the char*
+std::vector<char*> toCharArrays(const std::vector<std::string>& _vec) {
+  std::vector<char*> charArrays;
+  for (auto& s : _vec) {
+    char* array = new char[s.size() + 1];
+    std::strncpy(array, s.c_str(), s.size() + 1);
+    charArrays.push_back(array);
+  }
+  return charArrays;
 }
 
 }  // namespace strop

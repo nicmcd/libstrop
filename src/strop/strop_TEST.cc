@@ -107,6 +107,11 @@ TEST(StrOp, vecString_floatSpecificPrec) {
   ASSERT_EQ("[0.333,0.667,1.000]", strop::vecString<f64>(vals, ',', 3));
 }
 
+TEST(StrOp, vecString_empty) {
+  std::vector<f64> vals;
+  ASSERT_EQ("[]", strop::vecString<f64>(vals, ','));
+}
+
 TEST(StrOp, toCharArrays) {
   std::vector<std::string> v1({"-n", "10", "--page_size", "4096"});
   std::vector<char*> v2 = strop::toCharArrays(v1);

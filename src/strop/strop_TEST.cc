@@ -123,3 +123,21 @@ TEST(StrOp, toCharArrays) {
     delete[] s;
   }
 }
+
+TEST(StrOp, replaceFirst) {
+  ASSERT_EQ(strop::replaceFirst("here is some text some", "some", "a lot"),
+            "here is a lot text some");
+  ASSERT_EQ(strop::replaceFirst("something", "eth", "blahethblah"),
+            "somblahethblahing");
+  ASSERT_EQ(strop::replaceFirst("I $op you, do you $op me?", "$op", "love"),
+            "I love you, do you $op me?");
+}
+
+TEST(StrOp, replaceAll) {
+  ASSERT_EQ(strop::replaceAll("here is some text some", "some", "a lot"),
+            "here is a lot text a lot");
+  ASSERT_EQ(strop::replaceAll("somethething", "eth", "blahethblah"),
+            "somblahethblahblahethblahing");
+  ASSERT_EQ(strop::replaceAll("I $op you, do you $op me?", "$op", "love"),
+            "I love you, do you love me?");
+}

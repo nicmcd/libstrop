@@ -100,4 +100,32 @@ std::vector<char*> toCharArrays(const std::vector<std::string>& _vec) {
   return charArrays;
 }
 
+// in _str replace first instance of _from with _to
+//  https://stackoverflow.com/questions/3418231
+std::string replaceFirst(const std::string& _str, const std::string& _from,
+                         const std::string& _to) {
+  std::string str = _str;
+  size_t pos = str.find(_from);
+  if (pos != std::string::npos) {
+    str.replace(pos, _from.length(), _to);
+  }
+  return str;
+}
+
+// in _str replace all instances of _from with _to
+//  https://stackoverflow.com/questions/3418231
+std::string replaceAll(const std::string& _str, const std::string& _from,
+                       const std::string& _to) {
+  std::string str = _str;
+  if (_from.empty()) {
+    return str;
+  }
+  size_t pos = 0;
+  while ((pos = str.find(_from, pos)) != std::string::npos) {
+    str.replace(pos, _from.length(), _to);
+    pos += _to.length();
+  }
+  return str;
+}
+
 }  // namespace strop

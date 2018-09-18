@@ -50,8 +50,13 @@ std::vector<std::string> split(const std::string& _s, char _delim);
 std::vector<char*> toCharArrays(const std::vector<std::string>& _vec);
 
 template <typename T>
-std::string vecString(const std::vector<T>& _a, char delim = ',',
-                      s32 precision = -1);
+std::string vecString(const std::vector<T>& _a, char _delim = ',',
+                      s32 _precision = -1);
+
+std::string replaceFirst(const std::string& _str, const std::string& _from,
+                         const std::string& _to);
+std::string replaceAll(const std::string& _str, const std::string& _from,
+                       const std::string& _to);
 
 }  // namespace strop
 

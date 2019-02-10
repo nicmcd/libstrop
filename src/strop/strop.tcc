@@ -28,9 +28,12 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef STROP_STROP_TCC_
+#define STROP_STROP_TCC_
+
 #ifndef STROP_STROP_H_
 #error "don't include this file directly. use the .h file instead"
-#endif  // STROP_STROP_H_
+#else  // STROP_STROP_H_
 
 #include <sstream>
 #include <string>
@@ -56,3 +59,6 @@ std::string vecString(const std::vector<T>& _v, char _delim, s32 _precision) {
 }
 
 }  // namespace strop
+
+#endif  // STROP_STROP_H_
+#endif  // STROP_STROP_TCC_

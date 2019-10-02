@@ -58,6 +58,9 @@ std::string replaceFirst(const std::string& _str, const std::string& _from,
 std::string replaceAll(const std::string& _str, const std::string& _from,
                        const std::string& _to);
 
+bool startswith(const std::string& _str, const std::string& _prefix);
+bool endswith(const std::string& _str, const std::string& _suffix);
+
 }  // namespace strop
 
 #include "strop/strop.tcc"

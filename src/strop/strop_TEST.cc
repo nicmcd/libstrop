@@ -141,3 +141,25 @@ TEST(StrOp, replaceAll) {
   ASSERT_EQ(strop::replaceAll("I $op you, do you $op me?", "$op", "love"),
             "I love you, do you love me?");
 }
+
+TEST(StrOp, startswith) {
+  ASSERT_TRUE(strop::startswith("hello", "hello"));
+  ASSERT_TRUE(strop::startswith("hello", "hell"));
+  ASSERT_TRUE(strop::startswith("hello", "hel"));
+  ASSERT_TRUE(strop::startswith("hello", "he"));
+  ASSERT_TRUE(strop::startswith("hello", "h"));
+  ASSERT_TRUE(strop::startswith("hello", ""));
+  ASSERT_FALSE(strop::startswith("hello", "hellX"));
+  ASSERT_FALSE(strop::startswith("hello", "Xello"));
+}
+
+TEST(StrOp, endswith) {
+  ASSERT_TRUE(strop::endswith("hello", "hello"));
+  ASSERT_TRUE(strop::endswith("hello", "ello"));
+  ASSERT_TRUE(strop::endswith("hello", "llo"));
+  ASSERT_TRUE(strop::endswith("hello", "lo"));
+  ASSERT_TRUE(strop::endswith("hello", "o"));
+  ASSERT_TRUE(strop::endswith("hello", ""));
+  ASSERT_FALSE(strop::endswith("hello", "hellX"));
+  ASSERT_FALSE(strop::endswith("hello", "Xello"));
+}

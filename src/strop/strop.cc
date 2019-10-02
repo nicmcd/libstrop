@@ -128,4 +128,15 @@ std::string replaceAll(const std::string& _str, const std::string& _from,
   return str;
 }
 
+bool startswith(const std::string& _str, const std::string& _prefix) {
+  return ((_str.size() >= _prefix.size()) &&
+          (_str.substr(0, _prefix.size()) == _prefix));
+}
+
+bool endswith(const std::string& _str, const std::string& _suffix) {
+  return ((_str.size() >= _suffix.size()) &&
+          (_str.substr(_str.size() - _suffix.size()) == _suffix));
+
+}
+
 }  // namespace strop

@@ -28,7 +28,9 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#include "strop/strop.h"
+#include "strop/strop.h"  // NOLINT (build/include)
+
+#include <prim/prim.h>
 
 #include <cstring>
 
@@ -88,6 +90,18 @@ std::vector<std::string> split(const std::string& _s, char _delim) {
   return tokens;
 }
 
+// joins a vector of strings into a delimited single string
+std::string join(const std::vector<std::string>& _v, char _delim) {
+  std::stringstream ss;
+  for (u32 idx = 0; idx < _v.size(); idx++) {
+    ss << _v.at(idx);
+    if (idx < _v.size() - 1) {
+      ss << _delim;
+    }
+  }
+  return ss.str();
+}
+
 // turn a vector of strings into a vector of newly allocated char*
 //  NOTE: the user to responsible for deallocating the memory of the char*
 std::vector<char*> toCharArrays(const std::vector<std::string>& _vec) {
@@ -136,7 +150,6 @@ bool startswith(const std::string& _str, const std::string& _prefix) {
 bool endswith(const std::string& _str, const std::string& _suffix) {
   return ((_str.size() >= _suffix.size()) &&
           (_str.substr(_str.size() - _suffix.size()) == _suffix));
-
 }
 
 }  // namespace strop

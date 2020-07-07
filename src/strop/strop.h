@@ -46,6 +46,7 @@ std::string toLower(std::string _s);
 std::string toUpper(std::string _s);
 
 std::vector<std::string> split(const std::string& _s, char _delim);
+std::string join(const std::vector<std::string>& _v, char _delim);
 
 std::vector<char*> toCharArrays(const std::vector<std::string>& _vec);
 

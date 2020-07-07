@@ -69,6 +69,17 @@ TEST(StrOp, split) {
   }
 }
 
+TEST(StrOp, join) {
+  ASSERT_EQ(strop::join(std::vector<std::string>({"1", "2", "3"}), ','),
+            "1,2,3");
+  ASSERT_EQ(strop::join(std::vector<std::string>({"1", "2", "3"}), '-'),
+            "1-2-3");
+  ASSERT_EQ(strop::join(std::vector<std::string>({"1"}), '-'),
+            "1");
+  ASSERT_EQ(strop::join(std::vector<std::string>(), '-'),
+            "");
+}
+
 TEST(StrOp, vecString_defDelim) {
   ASSERT_EQ("[1,2,3]", strop::vecString<u32>({1, 2, 3}));
   ASSERT_EQ("[1,2,3]", strop::vecString<char>({'1', '2', '3'}));

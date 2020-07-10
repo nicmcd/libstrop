@@ -152,4 +152,18 @@ bool endswith(const std::string& _str, const std::string& _suffix) {
           (_str.substr(_str.size() - _suffix.size()) == _suffix));
 }
 
+std::size_t findNth(const std::string& _str, char _c, u32 _n) {
+  u32 found = 0;
+  for (std::size_t idx = 0; idx < _str.size(); idx++) {
+    if (_str[idx] == _c) {
+      found++;
+      if (found > _n) {
+        return idx;
+      }
+    }
+  }
+  return std::string::npos;
+}
+
+
 }  // namespace strop

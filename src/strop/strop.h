@@ -62,6 +62,8 @@ std::string replaceAll(const std::string& _str, const std::string& _from,
 bool startswith(const std::string& _str, const std::string& _prefix);
 bool endswith(const std::string& _str, const std::string& _suffix);
 
+std::size_t findNth(const std::string& _str, char _c, u32 _n);
+
 }  // namespace strop
 
 #include "strop/strop.tcc"

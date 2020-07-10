@@ -174,3 +174,12 @@ TEST(StrOp, endswith) {
   ASSERT_FALSE(strop::endswith("hello", "hellX"));
   ASSERT_FALSE(strop::endswith("hello", "Xello"));
 }
+
+TEST(StrOp, findNth) {
+  ASSERT_EQ(strop::findNth("a,b,c,d,e,f", ',', 0), 1);
+  ASSERT_EQ(strop::findNth("a,b,c,d,e,f", ',', 1), 3);
+  ASSERT_EQ(strop::findNth("a,b,c,d,e,f", ',', 2), 5);
+  ASSERT_EQ(strop::findNth("a,b,c,d,e,f", ',', 3), 7);
+  ASSERT_EQ(strop::findNth("a,b,c,d,e,f", ',', 4), 9);
+  ASSERT_EQ(strop::findNth("a,b,c,d,e,f", ',', 5), std::string::npos);
+}

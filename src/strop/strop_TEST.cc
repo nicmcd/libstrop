@@ -30,13 +30,12 @@
  */
 #include "strop/strop.h"
 
-#include <gtest/gtest.h>
-#include <prim/prim.h>
-
 #include <cstring>
-
 #include <string>
 #include <vector>
+
+#include "gtest/gtest.h"
+#include "prim/prim.h"
 
 TEST(StrOp, trim) {
   ASSERT_EQ("str ", strop::leftTrim(" str "));
@@ -74,10 +73,8 @@ TEST(StrOp, join) {
             "1,2,3");
   ASSERT_EQ(strop::join(std::vector<std::string>({"1", "2", "3"}), '-'),
             "1-2-3");
-  ASSERT_EQ(strop::join(std::vector<std::string>({"1"}), '-'),
-            "1");
-  ASSERT_EQ(strop::join(std::vector<std::string>(), '-'),
-            "");
+  ASSERT_EQ(strop::join(std::vector<std::string>({"1"}), '-'), "1");
+  ASSERT_EQ(strop::join(std::vector<std::string>(), '-'), "");
 }
 
 TEST(StrOp, vecString_defDelim) {
@@ -105,13 +102,13 @@ TEST(StrOp, vecString_specDelim3) {
 }
 
 TEST(StrOp, vecString_floatDefPrec) {
-  std::vector<f32> vals({1.0/3, 2.0/3, 3.0/3});
+  std::vector<f32> vals({1.0 / 3, 2.0 / 3, 3.0 / 3});
   ASSERT_EQ("[0.333333,0.666667,1]", strop::vecString<f32>(vals, ','));
   ASSERT_EQ("[0.333333-0.666667-1]", strop::vecString<f32>(vals, '-'));
 }
 
 TEST(StrOp, vecString_floatSpecificPrec) {
-  std::vector<f64> vals({1.0/3, 2.0/3, 3.0/3});
+  std::vector<f64> vals({1.0 / 3, 2.0 / 3, 3.0 / 3});
   ASSERT_EQ("[0,1,1]", strop::vecString<f64>(vals, ',', 0));
   ASSERT_EQ("[0.3,0.7,1.0]", strop::vecString<f64>(vals, ',', 1));
   ASSERT_EQ("[0.33,0.67,1.00]", strop::vecString<f64>(vals, ',', 2));
@@ -153,26 +150,26 @@ TEST(StrOp, replaceAll) {
             "I love you, do you love me?");
 }
 
-TEST(StrOp, startswith) {
-  ASSERT_TRUE(strop::startswith("hello", "hello"));
-  ASSERT_TRUE(strop::startswith("hello", "hell"));
-  ASSERT_TRUE(strop::startswith("hello", "hel"));
-  ASSERT_TRUE(strop::startswith("hello", "he"));
-  ASSERT_TRUE(strop::startswith("hello", "h"));
-  ASSERT_TRUE(strop::startswith("hello", ""));
-  ASSERT_FALSE(strop::startswith("hello", "hellX"));
-  ASSERT_FALSE(strop::startswith("hello", "Xello"));
+TEST(StrOp, startsWith) {
+  ASSERT_TRUE(strop::startsWith("hello", "hello"));
+  ASSERT_TRUE(strop::startsWith("hello", "hell"));
+  ASSERT_TRUE(strop::startsWith("hello", "hel"));
+  ASSERT_TRUE(strop::startsWith("hello", "he"));
+  ASSERT_TRUE(strop::startsWith("hello", "h"));
+  ASSERT_TRUE(strop::startsWith("hello", ""));
+  ASSERT_FALSE(strop::startsWith("hello", "hellX"));
+  ASSERT_FALSE(strop::startsWith("hello", "Xello"));
 }
 
-TEST(StrOp, endswith) {
-  ASSERT_TRUE(strop::endswith("hello", "hello"));
-  ASSERT_TRUE(strop::endswith("hello", "ello"));
-  ASSERT_TRUE(strop::endswith("hello", "llo"));
-  ASSERT_TRUE(strop::endswith("hello", "lo"));
-  ASSERT_TRUE(strop::endswith("hello", "o"));
-  ASSERT_TRUE(strop::endswith("hello", ""));
-  ASSERT_FALSE(strop::endswith("hello", "hellX"));
-  ASSERT_FALSE(strop::endswith("hello", "Xello"));
+TEST(StrOp, endsWith) {
+  ASSERT_TRUE(strop::endsWith("hello", "hello"));
+  ASSERT_TRUE(strop::endsWith("hello", "ello"));
+  ASSERT_TRUE(strop::endsWith("hello", "llo"));
+  ASSERT_TRUE(strop::endsWith("hello", "lo"));
+  ASSERT_TRUE(strop::endsWith("hello", "o"));
+  ASSERT_TRUE(strop::endsWith("hello", ""));
+  ASSERT_FALSE(strop::endsWith("hello", "hellX"));
+  ASSERT_FALSE(strop::endsWith("hello", "Xello"));
 }
 
 TEST(StrOp, findNth) {

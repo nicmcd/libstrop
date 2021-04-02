@@ -30,22 +30,22 @@
  */
 #include "strop/strop.h"  // NOLINT (build/include)
 
-#include <prim/prim.h>
-
-#include <cstring>
-
 #include <algorithm>
-#include <functional>
 #include <cctype>
+#include <cstring>
+#include <functional>
 #include <locale>
 #include <sstream>
 
+#include "prim/prim.h"
+
 // modified from:
-// http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring  NOLINT
+// http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
+// NOLINT
 
 namespace strop {
 
-// trim from start
+// Trims from the start.
 std::string leftTrim(std::string _s) {
   _s.erase(_s.begin(),
            std::find_if(_s.begin(), _s.end(),
@@ -53,33 +53,33 @@ std::string leftTrim(std::string _s) {
   return _s;
 }
 
-// trim from end
+// Trims from the end.
 std::string rightTrim(std::string _s) {
-  _s.erase(std::find_if(
-      _s.rbegin(),
-      _s.rend(),
-      std::not1(std::ptr_fun<int, int>(std::isspace))).base(), _s.end());
+  _s.erase(std::find_if(_s.rbegin(), _s.rend(),
+                        std::not1(std::ptr_fun<int, int>(std::isspace)))
+               .base(),
+           _s.end());
   return _s;
 }
 
-// trim from both ends
+// Trims from both ends.
 std::string trim(std::string _s) {
   return leftTrim(rightTrim(_s));
 }
 
-// converts to uppercase
+// Converts to uppercase.
 std::string toLower(std::string _s) {
   std::transform(_s.begin(), _s.end(), _s.begin(), ::tolower);
   return _s;
 }
 
-// converts to lowercase
+// Converts to lowercase.
 std::string toUpper(std::string _s) {
   std::transform(_s.begin(), _s.end(), _s.begin(), ::toupper);
   return _s;
 }
 
-// split a string into tokens via a delimiter
+// Splits a string into tokens via a delimiter.
 std::vector<std::string> split(const std::string& _s, char _delim) {
   std::vector<std::string> tokens;
   std::stringstream ss(_s);
@@ -90,7 +90,7 @@ std::vector<std::string> split(const std::string& _s, char _delim) {
   return tokens;
 }
 
-// joins a vector of strings into a delimited single string
+// Joins a vector of strings into a delimited single string.
 std::string join(const std::vector<std::string>& _v, char _delim) {
   std::stringstream ss;
   for (u32 idx = 0; idx < _v.size(); idx++) {
@@ -102,20 +102,20 @@ std::string join(const std::vector<std::string>& _v, char _delim) {
   return ss.str();
 }
 
-// turn a vector of strings into a vector of newly allocated char*
-//  NOTE: the user to responsible for deallocating the memory of the char*
+// Turns a vector of strings into a vector of newly allocated char*.
+// NOTE: The user to responsible for deallocating the memory of the char*.
 std::vector<char*> toCharArrays(const std::vector<std::string>& _vec) {
-  std::vector<char*> charArrays;
+  std::vector<char*> char_arrays;
   for (auto& s : _vec) {
     char* array = new char[s.size() + 1];
     std::strncpy(array, s.c_str(), s.size() + 1);
-    charArrays.push_back(array);
+    char_arrays.push_back(array);
   }
-  return charArrays;
+  return char_arrays;
 }
 
-// in _str replace first instance of _from with _to
-//  https://stackoverflow.com/questions/3418231
+// In _str replace first instance of _from with _to.
+// https://stackoverflow.com/questions/3418231
 std::string replaceFirst(const std::string& _str, const std::string& _from,
                          const std::string& _to) {
   std::string str = _str;
@@ -126,8 +126,8 @@ std::string replaceFirst(const std::string& _str, const std::string& _from,
   return str;
 }
 
-// in _str replace all instances of _from with _to
-//  https://stackoverflow.com/questions/3418231
+// In _str replace all instances of _from with _to.
+// https://stackoverflow.com/questions/3418231
 std::string replaceAll(const std::string& _str, const std::string& _from,
                        const std::string& _to) {
   std::string str = _str;
@@ -142,12 +142,12 @@ std::string replaceAll(const std::string& _str, const std::string& _from,
   return str;
 }
 
-bool startswith(const std::string& _str, const std::string& _prefix) {
+bool startsWith(const std::string& _str, const std::string& _prefix) {
   return ((_str.size() >= _prefix.size()) &&
           (_str.substr(0, _prefix.size()) == _prefix));
 }
 
-bool endswith(const std::string& _str, const std::string& _suffix) {
+bool endsWith(const std::string& _str, const std::string& _suffix) {
   return ((_str.size() >= _suffix.size()) &&
           (_str.substr(_str.size() - _suffix.size()) == _suffix));
 }
@@ -164,6 +164,5 @@ std::size_t findNth(const std::string& _str, char _c, u32 _n) {
   }
   return std::string::npos;
 }
-
 
 }  // namespace strop

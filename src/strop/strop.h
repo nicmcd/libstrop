@@ -31,10 +31,10 @@
 #ifndef STROP_STROP_H_
 #define STROP_STROP_H_
 
-#include <prim/prim.h>
-
 #include <string>
 #include <vector>
+
+#include "prim/prim.h"
 
 namespace strop {
 
@@ -59,8 +59,8 @@ std::string replaceFirst(const std::string& _str, const std::string& _from,
 std::string replaceAll(const std::string& _str, const std::string& _from,
                        const std::string& _to);
 
-bool startswith(const std::string& _str, const std::string& _prefix);
-bool endswith(const std::string& _str, const std::string& _suffix);
+bool startsWith(const std::string& _str, const std::string& _prefix);
+bool endsWith(const std::string& _str, const std::string& _suffix);
 
 std::size_t findNth(const std::string& _str, char _c, u32 _n);
 

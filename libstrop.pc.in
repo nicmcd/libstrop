@@ -1,0 +1,14 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}/@CMAKE_INSTALL_LIBEXECDIR@
+libdir=${prefix}/@CMAKE_INSTALL_LIBDIR@
+includedir=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
+datarootdir = ${prefix}/@CMAKE_INSTALL_DATAROOTDIR@
+datadir=${prefix}/@CMAKE_INSTALL_DATADIR@
+
+Name: libstrop
+Description: A library for common std::string operations
+URL: https://github.com/nicmcd/libstrop
+Version: 0.1.0
+Requires: libprim
+Libs: -L${libdir} -lstrop 
+Cflags: -I${includedir}

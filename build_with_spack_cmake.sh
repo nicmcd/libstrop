@@ -46,7 +46,7 @@ for i in "$@"; do
     esac
 done
 echo "SPACK_TARGET=${SPACK_TARGET}"
-echo "CLEAN=${SKIP_CLEAN}"
+echo "CLEAN=${CLEAN}"
 
 # Ensure dependencies are installed
 BRANCH=cmake
@@ -98,6 +98,7 @@ CMAKE_DIR=$(spack location -i cmake)
 CMAKE=${CMAKE_DIR}/bin/cmake
 
 if [[ ! -z "${CLEAN}" ]]; then
+    echo "cleaning build and install dirs"
     rm -rf ${BUILD_DIR} ${INSTALL_DIR}
 fi
 

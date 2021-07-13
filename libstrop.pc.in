@@ -10,5 +10,5 @@ Description: A library for common std::string operations
 URL: https://github.com/nicmcd/libstrop
 Version: 0.1.0
 Requires: libprim
-Libs: -L${libdir} -lstrop
+Libs: -L${libdir} -lstrop 
 Cflags: -I${includedir}

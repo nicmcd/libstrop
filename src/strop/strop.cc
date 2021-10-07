@@ -47,16 +47,16 @@ namespace strop {
 
 // Trims from the start.
 std::string leftTrim(std::string _s) {
-  _s.erase(_s.begin(),
-           std::find_if(_s.begin(), _s.end(),
-                        std::not1(std::ptr_fun<int, int>(std::isspace))));
+  _s.erase(_s.begin(), std::find_if(_s.begin(), _s.end(), [](unsigned char ch) {
+             return !std::isspace(ch);
+           }));
   return _s;
 }
 
 // Trims from the end.
 std::string rightTrim(std::string _s) {
   _s.erase(std::find_if(_s.rbegin(), _s.rend(),
-                        std::not1(std::ptr_fun<int, int>(std::isspace)))
+                        [](unsigned char ch) { return !std::isspace(ch); })
                .base(),
            _s.end());
   return _s;

@@ -206,8 +206,7 @@ TEST(StrOp, findNth) {
 
 // a suite of tests migrated from the commons-lang library
 
-TEST(test, testStartsWith)
-{
+TEST(test, testStartsWith) {
   ASSERT_TRUE(strop::startsWith(FOOBAR, ""));
 
   ASSERT_TRUE(strop::startsWith(foobar, foo));
@@ -224,8 +223,7 @@ TEST(test, testStartsWith)
   ASSERT_FALSE(strop::startsWith(FOOBAR, bar));
 }
 
-TEST(test, testEndsWith)
-{
+TEST(test, testEndsWith) {
   ASSERT_TRUE(strop::endsWith(FOOBAR, ""));
   ASSERT_FALSE(strop::endsWith(foobar, foo));
   ASSERT_FALSE(strop::endsWith(FOOBAR, FOO));
@@ -244,8 +242,7 @@ TEST(test, testEndsWith)
   ASSERT_FALSE(strop::endsWith("\u03B1\u03B2\u03B3\u03B4", "\u03B3\u0394"));
 }
 
-TEST(test, testTrim)
-{
+TEST(test, testTrim) {
   ASSERT_EQ(FOO, strop::trim(FOO + "  "));
   ASSERT_EQ(FOO, strop::trim(" " + FOO + "  "));
   ASSERT_EQ(FOO, strop::trim(" " + FOO));
@@ -255,48 +252,41 @@ TEST(test, testTrim)
   // ASSERT_EQ("", strop::trim(" \t\r\n\b "));
   ASSERT_EQ("", strop::trim(""));
 }
+
 // migrate tests from commons-lang
-TEST(test, testJoin_ArrayOfBytes)
-{
+TEST(test, testJoin_ArrayOfBytes) {
   ASSERT_EQ("1;2", strop::join(PRIM_LIST, SEPARATOR_CHAR));
 }
 
-TEST(test, testJoin_ArrayOfBooleans)
-{
+TEST(test, testJoin_ArrayOfBooleans) {
   ASSERT_EQ("false;false", strop::join(ARRAY_FALSE_FALSE, SEPARATOR_CHAR));
   ASSERT_EQ("", strop::join(vector<string>({}), SEPARATOR_CHAR));
   ASSERT_EQ("false,true,false", strop::join(ARRAY_FALSE_TRUE_FALSE, COMMA_SEPARATOR_CHAR));
 }
 
-TEST(test, testJoin_ArrayString_EmptyDelimiter)
-{
+TEST(test, testJoin_ArrayString_EmptyDelimiter) {
   ASSERT_EQ("", strop::join(EMPTY_ARRAY_LIST, ' '));
 }
 
-TEST(test, testJoin_ArrayString_NonEmptyDelimiter)
-{
+TEST(test, testJoin_ArrayString_NonEmptyDelimiter) {
   char delimiter = ',';
   ASSERT_EQ("", strop::join(EMPTY_ARRAY_LIST, delimiter));
   ASSERT_EQ((std::string(1, delimiter) + "foo"), strop::join(MIXED_ARRAY_LIST, delimiter));
 }
 
-TEST(test, testJoin_List_EmptyDelimiter)
-{
+TEST(test, testJoin_List_EmptyDelimiter) {
   ASSERT_EQ(TEXT_LIST_NOSEP, join(STRING_LIST, ' '));
   ASSERT_EQ("", join(EMPTY_STRING_LIST, ' '));
 }
 
-TEST(test, testReplaceAll_StringStringString)
-{
+TEST(test, testReplaceAll_StringStringString) {
   ASSERT_EQ("", strop::replaceAll("", ".+", "zzz"));
 }
 
-TEST(test, testReplaceFirst_StringStringString)
-{
+TEST(test, testReplaceFirst_StringStringString) {
   ASSERT_EQ("", strop::replaceFirst("", ".+", "zzz"));
 }
 
-TEST(test, testSplit_String)
-{
+TEST(test, testSplit_String) {
   ASSERT_EQ(0, strop::split("", '.').size());
 }
